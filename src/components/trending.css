@@ -1,0 +1,331 @@
+/* ============================================================
+   TRENDING PRODUCTS — EDITORIAL / PREMIUM SYSTEM
+============================================================ */
+
+/* ------------------------------------------------------------
+   DESIGN TOKENS
+------------------------------------------------------------ */
+:root {
+  --tp-text: var(--text, #0b1220);
+  --tp-muted: var(--muted, #5b6470);
+  --tp-accent: var(--gold, #f6c85f);
+
+  --tp-bg: var(--bg-page, #f7f7f5);
+  --tp-card-bg: linear-gradient(180deg, #ffffff, #fafafa);
+  --tp-border: rgba(0, 0, 0, 0.08);
+  --tp-shadow-soft: rgba(2, 6, 23, 0.12);
+  --tp-shadow-strong: rgba(2, 6, 23, 0.22);
+
+  --tp-radius: 18px;
+}
+
+/* Dark mode */
+:root[data-theme="dark"] {
+  --tp-card-bg: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.05),
+    rgba(255,255,255,0.02)
+  );
+  --tp-border: rgba(255,255,255,0.06);
+  --tp-shadow-soft: rgba(0,0,0,0.55);
+  --tp-shadow-strong: rgba(0,0,0,0.7);
+}
+
+/* ------------------------------------------------------------
+   ROOT SECTION
+------------------------------------------------------------ */
+.tp-root {
+  width: 100%;
+  padding: 80px 0 100px;
+  background: var(--tp-bg);
+
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 700ms ease, transform 700ms ease;
+}
+
+.tp-root.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ------------------------------------------------------------
+   HEADER
+------------------------------------------------------------ */
+.tp-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 28px;
+
+  padding: 0 24px;
+  margin-bottom: 36px;
+}
+
+.tp-title {
+  font-family: var(--serif, inherit);
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+
+.tp-sub {
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--tp-muted);
+  max-width: 420px;
+}
+
+/* ------------------------------------------------------------
+   CATEGORY CHIPS
+------------------------------------------------------------ */
+.tp-chips {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.tp-chip {
+  padding: 8px 16px;
+  border-radius: 999px;
+
+  background: var(--tp-card-bg);
+  border: 1px solid var(--tp-border);
+
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--tp-text);
+
+  cursor: pointer;
+  box-shadow: 0 10px 28px rgba(2,6,23,0.08);
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.tp-chip:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 20px 44px rgba(2,6,23,0.14);
+}
+
+.tp-chip.active {
+  background: linear-gradient(90deg, var(--tp-accent), #f3b84a);
+  color: #060606;
+  box-shadow: 0 24px 60px rgba(246,200,95,0.24);
+}
+
+/* ------------------------------------------------------------
+   GRID
+------------------------------------------------------------ */
+.tp-grid-wrap {
+  padding: 0 24px;
+}
+
+.tp-grid {
+  display: grid;
+  gap: 24px;
+}
+
+@media (min-width: 640px) {
+  .tp-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 980px) {
+  .tp-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 1400px) {
+  .tp-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ------------------------------------------------------------
+   PRODUCT CARD
+------------------------------------------------------------ */
+.tp-card {
+  background: var(--tp-card-bg);
+  border-radius: var(--tp-radius);
+  border: 1px solid var(--tp-border);
+  overflow: hidden;
+
+  box-shadow: 0 22px 60px var(--tp-shadow-soft);
+  transition:
+    transform 360ms cubic-bezier(.16,.84,.33,1),
+    box-shadow 360ms cubic-bezier(.16,.84,.33,1);
+}
+
+.tp-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 40px 120px var(--tp-shadow-strong);
+}
+
+/* ------------------------------------------------------------
+   IMAGE
+------------------------------------------------------------ */
+.tp-media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  min-height: 300px;
+  overflow: hidden;
+
+  background: linear-gradient(180deg, #ededed, #f6f6f6);
+}
+
+.tp-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  transition: transform 900ms cubic-bezier(.16,.84,.33,1);
+}
+
+.tp-card:hover .tp-media img {
+  transform: scale(1.07);
+}
+
+/* subtle editorial vignette */
+.tp-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(0,0,0,0) 55%,
+      rgba(0,0,0,0.18) 100%
+    );
+  pointer-events: none;
+}
+
+/* ------------------------------------------------------------
+   BADGE
+------------------------------------------------------------ */
+.tp-badge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 800;
+
+  border-radius: 999px;
+  background: rgba(255,255,255,0.9);
+  color: var(--tp-accent);
+}
+
+:root[data-theme="dark"] .tp-badge {
+  background: rgba(255,255,255,0.15);
+}
+
+/* ------------------------------------------------------------
+   BODY
+------------------------------------------------------------ */
+.tp-body {
+  padding: 18px 18px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+}
+
+.tp-name {
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.tp-price {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--tp-accent);
+}
+
+/* ------------------------------------------------------------
+   ACTIONS
+------------------------------------------------------------ */
+.tp-actions {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.tp-btn {
+  padding: 9px 16px;
+  border-radius: 12px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: transform 180ms ease;
+}
+
+.tp-btn:hover {
+  transform: translateY(-3px);
+}
+
+.tp-btn-primary {
+  background: linear-gradient(90deg, var(--tp-accent), #f3b84a);
+  color: #000;
+}
+
+.tp-btn-ghost {
+  background: transparent;
+  border: 1px solid var(--tp-border);
+  color: var(--tp-text);
+}
+
+/* ------------------------------------------------------------
+   VIEW MORE
+------------------------------------------------------------ */
+.tp-loadmore-wrap {
+  display: flex;
+  justify-content: center;
+  margin-top: 36px;
+}
+
+.tp-loadmore-btn {
+  padding: 14px 26px;
+  border-radius: 16px;
+
+  background: linear-gradient(90deg, var(--tp-accent), #f3b84a);
+  border: none;
+
+  font-weight: 900;
+  color: #000;
+  cursor: pointer;
+
+  box-shadow: 0 18px 52px rgba(246,200,95,0.22);
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.tp-loadmore-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 30px 90px rgba(246,200,95,0.3);
+}
+
+/* ------------------------------------------------------------
+   MOBILE
+------------------------------------------------------------ */
+@media (max-width: 760px) {
+  .tp-root {
+    padding: 60px 0 80px;
+  }
+
+  .tp-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+
+  .tp-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .tp-media {
+    min-height: 220px;
+  }
+
+  .tp-btn {
+    padding: 7px 12px;
+    font-size: 13px;
+  }
+}

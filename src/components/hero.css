@@ -1,0 +1,298 @@
+/* =========================================================
+   DESIGN TOKENS — LUXURY SYSTEM (LOCKED)
+========================================================= */
+:root {
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --bg-page: #f7f7f5;
+
+  --text-main: #0f172a;
+  --text-muted: #6b7280;
+
+  --border: rgba(15, 23, 42, 0.08);
+  --shadow: rgba(15, 23, 42, 0.22);
+
+  --serif: "Playfair Display", serif;
+  --sans: "Inter", system-ui, sans-serif;
+}
+
+/* =========================================================
+   ENTRANCE SYSTEM — EDITORIAL STAGGER
+========================================================= */
+.lux-animate {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 900ms var(--ease), transform 900ms var(--ease);
+}
+
+.lux-show .lux-animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.a1 { transition-delay: 120ms; }
+.a2 { transition-delay: 260ms; }
+.a3 { transition-delay: 420ms; }
+.a4 { transition-delay: 600ms; }
+.a5 { transition-delay: 780ms; }
+
+/* =========================================================
+   HERO CANVAS — RUNWAY SCENE
+========================================================= */
+.lux-hero {
+  position: relative;
+  min-height: 100vh;
+  padding: 160px 24px 120px;
+  background:
+    radial-gradient(120% 80% at 8% 8%, #ffffff 0%, transparent 55%),
+    linear-gradient(180deg, #ffffff 0%, var(--bg-page) 100%);
+  overflow: hidden;
+
+  --scene: 0;
+}
+
+/* ultra subtle cinematic grain */
+.lux-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.018'/%3E%3C/svg%3E");
+  mix-blend-mode: soft-light;
+}
+
+/* =========================================================
+   LAYOUT
+========================================================= */
+.lux-container {
+  max-width: 1280px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 96px;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+/* =========================================================
+   CONTENT — EDITORIAL SAFETY
+========================================================= */
+.lux-content {
+  position: relative;
+  transform: translateY(calc(var(--scene) * -32px));
+  opacity: calc(1 - (var(--scene) * 0.55));
+}
+
+/* text veil (not boxy, not glassy) */
+.lux-content::before {
+  content: "";
+  position: absolute;
+  inset: -100px -140px;
+  background:
+    radial-gradient(
+      75% 65% at 0% 30%,
+      rgba(255,255,255,0.98),
+      rgba(255,255,255,0.88) 42%,
+      transparent 72%
+    );
+  z-index: -1;
+}
+
+/* =========================================================
+   TYPOGRAPHY
+========================================================= */
+.lux-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.lux-title {
+  font-family: var(--serif);
+  font-size: 60px;
+  line-height: 1.05;
+  margin: 22px 0;
+  color: var(--text-main);
+}
+
+.lux-title span {
+  display: block;
+  margin-top: 6px;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.lux-description {
+  max-width: 540px;
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--text-muted);
+}
+
+/* =========================================================
+   CTAs — QUIET CONFIDENCE
+========================================================= */
+.lux-ctas {
+  display: flex;
+  gap: 18px;
+  margin-top: 40px;
+}
+
+.lux-primary {
+  background: var(--text-main);
+  color: #fff;
+  padding: 16px 32px;
+  border-radius: 14px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 32px 96px var(--shadow);
+  transition: transform 300ms var(--ease);
+}
+
+.lux-primary:hover {
+  transform: translateY(-2px);
+}
+
+.lux-secondary {
+  background: rgba(255,255,255,0.78);
+  border: 1px solid var(--border);
+  padding: 16px 32px;
+  border-radius: 14px;
+  font-weight: 600;
+  backdrop-filter: blur(8px);
+}
+
+/* =========================================================
+   TRUST
+========================================================= */
+.lux-trust {
+  display: flex;
+  gap: 56px;
+  margin-top: 56px;
+}
+
+.lux-trust strong {
+  font-size: 22px;
+  font-weight: 900;
+}
+
+.lux-trust span {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* =========================================================
+   VISUAL — FULL-BLEED RUNWAY (NO HANGING)
+========================================================= */
+.lux-visual {
+  position: absolute;
+  inset: -14% -20%;
+  background-size: cover;
+  background-position: center 18%;
+  z-index: 0;
+
+  /* ONLY mouse parallax */
+  transform: translate(var(--px, 0), var(--py, 0));
+  will-change: transform;
+}
+
+/* studio lighting (moves with scene, not image) */
+.lux-visual::before {
+  content: "";
+  position: absolute;
+  inset: -50%;
+  background:
+    radial-gradient(
+      38% 32% at var(--light-x,60%)
+      calc(var(--light-y,45%) + (var(--scene) * 16%)),
+      rgba(255,255,255,0.26),
+      rgba(15,23,42,0.18) 48%,
+      transparent 72%
+    );
+  filter: blur(150px);
+}
+
+/* editorial atmospheric fade */
+.lux-visual::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      to right,
+      rgba(247,247,245,0.98) 0%,
+      rgba(247,247,245,0.92) 36%,
+      rgba(247,247,245,0.65) 55%,
+      transparent 78%
+    ),
+    linear-gradient(
+      to bottom,
+      transparent 58%,
+      var(--bg-page) 100%
+    );
+  opacity: calc(0.6 + (var(--scene) * 0.4));
+}
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+@media (max-width: 1024px) {
+  .lux-container {
+    grid-template-columns: 1fr;
+    gap: 72px;
+  }
+
+  .lux-title {
+    font-size: 46px;
+  }
+
+  .lux-visual {
+    inset: -10%;
+  }
+}
+/* =========================================================
+   HERO → NEXT SECTION DISSOLVE
+========================================================= */
+
+/* Hero fades instead of ending */
+.lux-hero {
+  mask-image: linear-gradient(
+    to bottom,
+    rgba(0,0,0,1) 0%,
+    rgba(0,0,0,1) 72%,
+    rgba(0,0,0,0.65) 82%,
+    rgba(0,0,0,0.2) 90%,
+    rgba(0,0,0,0) 100%
+  );
+
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0,0,0,1) 0%,
+    rgba(0,0,0,1) 72%,
+    rgba(0,0,0,0.65) 82%,
+    rgba(0,0,0,0.2) 90%,
+    rgba(0,0,0,0) 100%
+  );
+}
+
+/* Image gently loses contrast while exiting */
+.lux-visual {
+  filter:
+    saturate(calc(1 - (var(--scene) * 0.15)))
+    contrast(calc(1 - (var(--scene) * 0.12)))
+    brightness(calc(1 - (var(--scene) * 0.05)));
+}
+
+/* Text exits earlier than image (editorial pacing) */
+.lux-content {
+  opacity: calc(1 - (var(--scene) * 0.75));
+}
+
+/* Atmospheric veil thickens toward exit */
+.lux-visual::after {
+  opacity: calc(0.6 + (var(--scene) * 0.6));
+}
