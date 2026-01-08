@@ -31,9 +31,10 @@ function App(){
     <div>
       <Header />
       <Hero />
-      <Features />
-      <Categories />
+            <Categories />
       <TrendingProducts />
+
+      <Features />
       <Footer />
     </div>
   );
