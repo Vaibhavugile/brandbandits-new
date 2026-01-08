@@ -1,0 +1,214 @@
+/* ============================================================
+   PRODUCT DETAIL PAGE — PREMIUM FASHION
+============================================================ */
+
+.pdp-page {
+  background: #f7f7f5;
+  padding: 120px 24px 120px;
+}
+
+/* Layout */
+.pdp-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  gap: 56px;
+}
+
+@media (min-width: 1024px) {
+  .pdp-container {
+    grid-template-columns: 1.1fr 0.9fr;
+    align-items: start;
+  }
+}
+
+/* ------------------------------------------------------------
+   IMAGE GALLERY
+------------------------------------------------------------ */
+.pdp-gallery {
+  display: grid;
+  gap: 14px;
+}
+
+.pdp-main-image {
+  border-radius: 22px;
+  overflow: hidden;
+  background: #eaeaea;
+}
+
+.pdp-main-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pdp-thumbs {
+  display: flex;
+  gap: 10px;
+}
+
+.pdp-thumb {
+  width: 72px;
+  height: 72px;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  border: 1px solid rgba(0,0,0,0.1);
+  background: #eaeaea;
+}
+
+.pdp-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ------------------------------------------------------------
+   INFO
+------------------------------------------------------------ */
+.pdp-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.pdp-name {
+  font-family: var(--serif);
+  font-size: 34px;
+  font-weight: 500;
+}
+
+.pdp-tagline {
+  margin-top: 8px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* Rating */
+.pdp-rating {
+  margin-top: 12px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* Pricing */
+.pdp-price-row {
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pdp-price {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.pdp-compare {
+  font-size: 14px;
+  text-decoration: line-through;
+  color: #9ca3af;
+}
+
+.pdp-discount {
+  font-size: 13px;
+  color: #15803d;
+  font-weight: 600;
+}
+
+/* ------------------------------------------------------------
+   SWATCHES
+------------------------------------------------------------ */
+.pdp-section {
+  margin-top: 26px;
+}
+
+.pdp-section-title {
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/* Ensure swatches always visible */
+.pdp-page .swatch-row {
+  opacity: 1 !important;
+}
+
+/* ------------------------------------------------------------
+   SIZES
+------------------------------------------------------------ */
+.pdp-sizes {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.pdp-size {
+  padding: 9px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(0,0,0,0.14);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.pdp-size.selected {
+  background: #0b1220;
+  color: #fff;
+  border-color: transparent;
+}
+
+/* ------------------------------------------------------------
+   CTA
+------------------------------------------------------------ */
+.pdp-cta {
+  margin-top: 32px;
+}
+
+.pdp-add {
+  width: 100%;
+  padding: 16px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 14px;
+  border: none;
+  background: #0b1220;
+  color: #fff;
+  cursor: pointer;
+}
+
+/* ------------------------------------------------------------
+   DESCRIPTION
+------------------------------------------------------------ */
+.pdp-description {
+  margin-top: 36px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #374151;
+}
+
+/* ------------------------------------------------------------
+   DETAILS
+------------------------------------------------------------ */
+.pdp-details {
+  margin-top: 28px;
+  border-top: 1px solid rgba(0,0,0,0.08);
+  padding-top: 20px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+/* ------------------------------------------------------------
+   MOBILE
+------------------------------------------------------------ */
+@media (max-width: 760px) {
+  .pdp-page {
+    padding: 80px 16px 100px;
+  }
+
+  .pdp-name {
+    font-size: 26px;
+  }
+
+  .pdp-thumbs {
+    overflow-x: auto;
+  }
+}

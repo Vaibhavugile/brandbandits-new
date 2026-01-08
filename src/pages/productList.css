@@ -1,0 +1,213 @@
+/* ============================================================
+   PRODUCT LIST PAGE (PLP) — FASHION COMMERCE (FINAL)
+============================================================ */
+
+/* ------------------------------------------------------------
+   PAGE
+------------------------------------------------------------ */
+.plp-page {
+  background: #f7f7f5;
+}
+
+/* ------------------------------------------------------------
+   CATEGORY HEADER
+------------------------------------------------------------ */
+.plp-header {
+  padding: 120px 24px 56px;
+  text-align: center;
+}
+
+.plp-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #6b7280;
+}
+
+.plp-title {
+  font-family: var(--serif);
+  font-size: 40px;
+  font-weight: 500;
+  margin-top: 12px;
+}
+
+.plp-count {
+  margin-top: 6px;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+/* ------------------------------------------------------------
+   GRID
+------------------------------------------------------------ */
+.plp-grid-wrap {
+  padding: 0 24px 100px;
+}
+
+.plp-grid {
+  display: grid;
+  gap: 20px;
+}
+
+/* Responsive columns */
+@media (min-width: 640px) {
+  .plp-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (min-width: 1024px) {
+  .plp-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 1280px) {
+  .plp-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+/* ------------------------------------------------------------
+   PRODUCT CARD
+------------------------------------------------------------ */
+.plp-card {
+  background: #ffffff;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+
+  transition:
+    transform 280ms ease,
+    box-shadow 280ms ease;
+}
+
+.plp-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.08);
+}
+
+/* ------------------------------------------------------------
+   IMAGE
+------------------------------------------------------------ */
+.plp-media {
+  aspect-ratio: 3 / 4;
+  background: #eaeaea;
+}
+
+.plp-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ------------------------------------------------------------
+   BODY
+------------------------------------------------------------ */
+.plp-body {
+  padding: 14px 14px 16px;
+  text-align: center;
+}
+
+.plp-name {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.plp-price {
+  font-size: 13px;
+  color: #6b7280;
+  margin-top: 4px;
+}
+
+/* ------------------------------------------------------------
+   SWATCHES
+------------------------------------------------------------ */
+.plp-swatches {
+  margin-top: 6px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Ensure swatches are visible */
+.plp-page .swatch-row {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Smaller swatches for PLP */
+.plp-page .swatch-btn {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+}
+
+/* ------------------------------------------------------------
+   ACTIONS (ALWAYS VISIBLE — DESKTOP & MOBILE)
+------------------------------------------------------------ */
+.plp-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 10px;
+
+  opacity: 1;
+  transform: none;
+}
+
+/* Buttons */
+.plp-btn {
+  padding: 6px 10px;
+  font-size: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+
+  transition:
+    background 180ms ease,
+    color 180ms ease,
+    border-color 180ms ease;
+}
+
+/* Add to Cart */
+.plp-btn-cart {
+  background: transparent;
+  border: 1px solid rgba(0, 0, 0, 0.14);
+  color: #0b1220;
+}
+
+.plp-btn-cart:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
+/* View */
+.plp-btn-view {
+  background: #0b1220;
+  color: #ffffff;
+  border: none;
+}
+
+.plp-btn-view:hover {
+  background: #000000;
+}
+
+/* ------------------------------------------------------------
+   MOBILE OPTIMIZATION (SHOW 4 PRODUCTS)
+------------------------------------------------------------ */
+@media (max-width: 760px) {
+  .plp-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .plp-body {
+    padding: 10px 10px 12px;
+  }
+
+  .plp-name {
+    font-size: 13px;
+  }
+
+  .plp-price {
+    font-size: 12px;
+  }
+
+  .plp-btn {
+    font-size: 11px;
+    padding: 6px 8px;
+  }
+}
