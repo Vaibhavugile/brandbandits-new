@@ -1,7 +1,9 @@
 import React, { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import "./header.css";
 
 import { useCart } from "../context/CartContext";
+import { useAuth } from "../context/AuthContext";
 import CartDrawer from "./CartDrawer";
 
 export default function Header() {
@@ -9,9 +11,17 @@ export default function Header() {
   const [cartOpen, setCartOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const mobileRef = useRef(null);
+  const navigate = useNavigate();
 
-  const { cart } = useCart();
-  const cartCount = cart.reduce((sum, item) => sum + item.qty, 0);
+  /* CART */
+  const { cart, justAdded, setJustAdded } = useCart();
+  const cartCount = cart.reduce(
+    (sum, item) => sum + item.qty,
+    0
+  );
+
+  /* AUTH */
+  const { user, signOut, isAdmin } = useAuth();
 
   /* scroll refinement */
   useEffect(() => {
@@ -20,11 +30,18 @@ export default function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  /* lock body scroll when overlays open */
+  /* 🔥 AUTO OPEN CART WHEN ITEM IS ADDED */
   useEffect(() => {
-    document.body.style.overflow =
-      menuOpen || cartOpen ? "hidden" : "";
-  }, [menuOpen, cartOpen]);
+    if (justAdded) {
+      setCartOpen(true);
+      setJustAdded(false);
+    }
+  }, [justAdded, setJustAdded]);
+
+  /* lock body scroll ONLY for mobile menu */
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+  }, [menuOpen]);
 
   /* close mobile menu on outside click */
   useEffect(() => {
@@ -96,9 +113,32 @@ export default function Header() {
 
           {/* ACTIONS */}
           <div className="bb-right">
-            <button className="bb-ghost-btn">
-              Sign in
-            </button>
+            {/* ADMIN BUTTON */}
+            {isAdmin && (
+              <button
+                className="bb-ghost-btn"
+                onClick={() => navigate("/admin")}
+              >
+                Admin
+              </button>
+            )}
+
+            {/* AUTH BUTTON */}
+            {user ? (
+              <button
+                className="bb-ghost-btn"
+                onClick={signOut}
+              >
+                Sign out
+              </button>
+            ) : (
+              <button
+                className="bb-ghost-btn"
+                onClick={() => navigate("/signin")}
+              >
+                Sign in
+              </button>
+            )}
 
             {/* CART BUTTON */}
             <button
@@ -175,9 +215,37 @@ export default function Header() {
                 marginTop: 12
               }}
             >
-              <button className="bb-ghost-btn">
-                Sign in
-              </button>
+              {isAdmin && (
+                <button
+                  className="bb-ghost-btn"
+                  onClick={() => {
+                    setMenuOpen(false);
+                    navigate("/admin");
+                  }}
+                >
+                  Admin
+                </button>
+              )}
+
+              {user ? (
+                <button
+                  className="bb-ghost-btn"
+                  onClick={signOut}
+                >
+                  Sign out
+                </button>
+              ) : (
+                <button
+                  className="bb-ghost-btn"
+                  onClick={() => {
+                    setMenuOpen(false);
+                    navigate("/signin");
+                  }}
+                >
+                  Sign in
+                </button>
+              )}
+
               <button className="bb-primary-btn">
                 Explore Collection
               </button>
@@ -186,7 +254,7 @@ export default function Header() {
         </div>
       </header>
 
-      {/* CART DRAWER */}
+      {/* MINI CART */}
       <CartDrawer
         open={cartOpen}
         onClose={() => setCartOpen(false)}

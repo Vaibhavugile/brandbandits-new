@@ -19,6 +19,13 @@ import ProductDetail from "./pages/ProductDetail";
 
 /* Cart */
 import { CartProvider } from "./context/CartContext";
+import { AuthProvider } from "./context/AuthContext";
+import Auth from "./pages/Auth";
+import ProtectedRoute from "./routes/ProtectedRoute";
+
+import AdminRoute from "./routes/AdminRoute";
+import AdminDashboard from "./admin/AdminDashboard";
+import AdminProducts from "./admin/AdminProducts";
 
 function App() {
   useEffect(() => {
@@ -42,6 +49,7 @@ function App() {
   }, []);
 
   return (
+    <AuthProvider>
     <CartProvider>
       <Header />
 
@@ -70,13 +78,37 @@ function App() {
           path="/product/:id"
           element={<ProductDetail />}
         />
-              <Route path="/checkout" element={<Checkout />} />
+              <Route
+  path="/checkout"
+  element={
+    <ProtectedRoute>
+      <Checkout />
+    </ProtectedRoute>
+  }
+/>
+<Route path="/signin" element={<Auth />} />
+<Route path="/signup" element={<Auth />} />
+
+{/* ADMIN ROUTES */}
+<Route
+  path="/admin"
+  element={
+    <AdminRoute>
+      <AdminDashboard />
+    </AdminRoute>
+  }
+>
+  <Route path="products" element={<AdminProducts />} />
+</Route>
+
 
       </Routes>
 
 
+
       <Footer />
     </CartProvider>
+    </AuthProvider>
   );
 }
 

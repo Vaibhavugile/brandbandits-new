@@ -2,7 +2,8 @@ import React, {
   createContext,
   useContext,
   useReducer,
-  useEffect
+  useEffect,
+  useState
 } from "react";
 
 /* ------------------------------------------------------------
@@ -37,13 +38,15 @@ function cartReducer(state, action) {
         return { items: updated };
       }
 
-      return { items: [...state.items, { ...item, qty: 1 }] };
+      return {
+        items: [...state.items, { ...item, qty: 1 }]
+      };
     }
 
     case "UPDATE_QTY": {
       const updated = [...state.items];
       updated[action.index].qty = action.qty;
-      return { items: updated.filter(i => i.qty > 0) };
+      return { items: updated.filter((i) => i.qty > 0) };
     }
 
     case "REMOVE_ITEM":
@@ -69,6 +72,9 @@ export function CartProvider({ children }) {
     items: []
   });
 
+  /* 🔔 AUTO-OPEN SIGNAL */
+  const [justAdded, setJustAdded] = useState(false);
+
   /* Load from localStorage */
   useEffect(() => {
     const stored = localStorage.getItem("cart");
@@ -88,12 +94,18 @@ export function CartProvider({ children }) {
     );
   }, [state.items]);
 
+  /* Wrapped addToCart to trigger signal */
+  const addToCart = (item) => {
+    dispatch({ type: "ADD_ITEM", item });
+    setJustAdded(true); // 👈 IMPORTANT
+  };
+
   return (
     <CartContext.Provider
       value={{
         cart: state.items,
-        addToCart: (item) =>
-          dispatch({ type: "ADD_ITEM", item }),
+
+        addToCart,
         updateQty: (index, qty) =>
           dispatch({
             type: "UPDATE_QTY",
@@ -106,7 +118,11 @@ export function CartProvider({ children }) {
             index
           }),
         clearCart: () =>
-          dispatch({ type: "CLEAR" })
+          dispatch({ type: "CLEAR" }),
+
+        /* expose signal */
+        justAdded,
+        setJustAdded
       }}
     >
       {children}

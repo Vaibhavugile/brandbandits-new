@@ -1,0 +1,222 @@
+/* ============================================================
+   PRODUCT FORM — PREMIUM ADMIN MODAL
+============================================================ */
+
+/* OVERLAY */
+.pf-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 12, 20, 0.55);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+
+/* CARD */
+.pf-card {
+  width: 760px;
+  max-width: 94vw;
+  max-height: 92vh;
+  overflow-y: auto;
+
+  background: #ffffff;
+  border-radius: 22px;
+  padding: 26px 28px;
+
+  box-shadow: 0 40px 120px rgba(0,0,0,0.35);
+}
+
+/* HEADER */
+.pf-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.pf-header h2 {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.pf-header button {
+  font-size: 26px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #555;
+}
+
+/* SECTION */
+.pf-section {
+  margin-top: 28px;
+}
+
+.pf-section h3 {
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  color: #6b7280;
+}
+
+/* INPUTS */
+.pf-section input,
+.pf-section textarea,
+.pf-section select {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 14px;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 14px;
+  font-size: 14px;
+  background: #fafafa;
+  transition: border 150ms ease, background 150ms ease;
+}
+
+.pf-section textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.pf-section input:focus,
+.pf-section textarea:focus,
+.pf-section select:focus {
+  outline: none;
+  border-color: #0b1220;
+  background: #fff;
+}
+
+/* GRID */
+.pf-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+/* VARIANTS */
+.pf-variant {
+  display: grid;
+  grid-template-columns: 1fr 1fr 60px;
+  gap: 10px;
+  padding: 12px;
+  background: #f9f9f7;
+  border-radius: 14px;
+  margin-bottom: 14px;
+}
+
+.pf-variant input[type="color"] {
+  height: 42px;
+  padding: 4px;
+  cursor: pointer;
+}
+
+/* VARIANT FULL WIDTH */
+.pf-variant input:nth-child(4),
+.pf-variant input:nth-child(5),
+.pf-variant input:nth-child(6) {
+  grid-column: span 3;
+}
+
+/* ACTION BUTTONS */
+.pf-add {
+  margin-top: 8px;
+  background: #f3f4f6;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.pf-remove {
+  grid-column: span 3;
+  background: #fee;
+  border: none;
+  padding: 8px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+/* IMAGES */
+.pf-images {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.pf-img {
+  position: relative;
+}
+
+.pf-img img {
+  width: 96px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 14px;
+  background: #eee;
+}
+
+.pf-img button {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: #000;
+  color: #fff;
+  border: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* FOOTER */
+.pf-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 14px;
+  margin-top: 32px;
+  padding-top: 18px;
+  border-top: 1px solid #e5e7eb;
+}
+
+.pf-cancel {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.pf-save {
+  background: #0b1220;
+  color: #fff;
+  padding: 12px 22px;
+  border-radius: 14px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .pf-card {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    border-radius: 0;
+  }
+
+  .pf-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pf-variant {
+    grid-template-columns: 1fr;
+  }
+}
